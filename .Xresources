@@ -1,0 +1,5 @@
+URxvt.font: xft: Operator Mono Ssm Lig: size=16: antialiasing=true;xft:Source\ Code\ Pro\ for\ Powerline,Source\ Code\ Pro\ Medium:size=11; xft: FontAwesome: size=16: antialiasing=true;
+urxvt*depth: 32
+urxvt*background: rgba:0000/0000/0000/7700
+URxvt.scrollBar: false
+URxvt*foreground: #FFFFFF

@@ -1,0 +1,215 @@
+
+
+[bar/default]
+width = 100%
+height = 30
+radius = 0
+fixed-center = true
+bottom = false
+background = #0325252c
+foreground = #ffffff
+
+line-size = 3
+line-color =
+
+border-size = 0
+border-color =
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = "Operator Mono Ssm Lig Medium:size=14;1"
+font-1 = "Font Awesome 5 Free:style=Solid:size=14;1"
+font-2 = "Font Awesome 5 Brands:size=14;1"
+#font-0 = "Noto Mono for Powerline Regular: size=15;1"
+modules-left = i3
+modules-right = pulseaudio date powermenu
+
+#tray-position = right
+#tray-padding =
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/i3]
+type = internal/i3
+
+ws-icon-0 = 0;0
+ws-icon-1 = 1;%{F#1187ee}
+ws-icon-2 = 2;%{F#E55B0A}
+ws-icon-3 = 3;%{F#1187ee}
+ws-icon-4 = 4;%{F#1187ee}
+ws-icon-5 = 5;%{F#7B6FDE}
+ws-icon-6 = 6;%{F#1ED761}
+ws-icon-7 = 7;%{F#738ADB}
+ws-icon-default = 
+pin-workspaces = true
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+label-mode-padding = 2
+label-mode-foreground = #ffffff
+label-mode-background = argb:bb25252c
+
+label-focused = %icon%
+label-focused-background = #dd25252c
+label-focused-foreground = #1187ee
+label-focused-padding = 2
+
+label-unfocused = %icon%
+label-unfocused-background = argb:bb25252c
+label-unfocused-foreground = #aaa
+label-unfocused-padding = 2
+
+label-visible = %icon%
+label-visible-background = #25252c
+label-visible-foreground = #fff
+label-visible-padding = 2
+
+label-urgent = %icon%
+label-urgent-background = #BA2922
+label-urgent-padding = 2
+
+[module/wlan]
+type = internal/network
+interface = net1
+interval = 3.0
+
+format-connected = <ramp-signal> <label-connected>
+format-connected-foreground = #25252c
+format-connected-background = #1187ee
+format-connected-padding = 2
+label-connected = %essid%
+
+format-disconnected =
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-foreground = #25252c
+
+[module/eth]
+type = internal/network
+interface = enp0s3
+interval = 3.0
+
+format-connected-padding = 2
+format-connected-foreground = #25252c
+format-connected-background = #1187ee
+format-connected-prefix = " "
+format-connected-prefix-foreground = #25252c
+label-connected = %local_ip%
+
+format-disconnected =
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = " %d %m %Y"
+time = %H:%M
+
+format-prefix = 
+format-foreground = #fff
+format-background = #1187ee
+format-padding = 2
+
+label = %date% %time%
+label-font = 3
+[module/pulseaudio]
+type = internal/pulseaudio
+
+; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
+; If not, uses default sink
+sink = alsa_output.pci-0000_12_00.3.analog-stereo
+
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = true
+
+; Interval for volume increase/decrease (in percent points)
+; Default: 5
+interval = 5
+; Available tags:
+;   <label-volume> (default)
+;   <ramp-volume>
+;   <bar-volume>
+format-volume = <ramp-volume> <label-volume>
+
+; Available tags:
+;   <label-muted> (default)
+;   <ramp-volume>
+;   <bar-volume>
+;format-muted = <label-muted>
+
+; Available tokens:
+;   %percentage% (default)
+;label-volume = %percentage%%
+
+; Available tokens:
+;   %percentage% (default)
+label-muted =  muted
+label-muted-foreground = #666
+
+; Only applies if <ramp-volume> is used
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+
+format-spacing = 1
+
+label-open = 
+label-open-foreground = #fff
+label-close =  cancel
+label-close-foreground = #1187ee
+label-separator = |
+label-separator-foreground = #1187ee
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+menu-0-2 = log off
+menu-0-2-exec = menu-open-3
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = reboot
+
+menu-2-0 = power off
+menu-2-0-exec = poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+menu-3-0 = log off
+menu-3-0-exec = pkill -KILL -u $USER
+menu-3-1 = cancel
+menu-3-1-exec = menu-open-0
+
+[settings]
+screenchange-reload = true
+
+[global/wm]
+margin-top = w
+margin-bottom = 0
+
+[bar/dp]
+inherit = bar/default
+[bar/hdmi]
+inherit = bar/default
+monitor=HDMI-0
+modules-right = pulseaudio date
+tray-position = right
+

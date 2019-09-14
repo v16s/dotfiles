@@ -1,0 +1,11 @@
+rofi.modi:    window,drun,ssh,clipboard:greenclip print,run
+rofi.font: fira code 14 
+rofi.sidebar-mode: true
+!                  'background', 'border', 'separator'
+rofi.color-window: argb:aa25252c, argb:00ffffff, argb:00081600
+! State:           'bg',     'fg',     'bgalt',  'hlbg',   'hlfg'
+rofi.color-normal: argb:0025252c, #ffffff, argb:0025252c, #1187ee, #ffffff 
+rofi.color-urgent: argb:0025252c, #ffffff, argb:0025252c, #1187ee, #ffffff
+rofi.color-active: argb:0025252c, #ffffff, argb:0025252c, #1187ee, #ffffff
+rofi.show-icons: true
+rofi.icon-theme: "papirus-dark"
