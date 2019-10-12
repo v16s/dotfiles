@@ -1,1 +1,1 @@
-/home/vignesh/.local/share/omf/themes/spacefish/fish_prompt.fish
+/home/v16//.local/share/omf/themes/spacefish/fish_prompt.fish
