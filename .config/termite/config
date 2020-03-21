@@ -6,7 +6,7 @@
 #cell_width_scale = 1.0
 clickable_url = true
 # dynamic_title = true
-font = Operator Mono Ssm Lig 16
+font = JetBrains Mono 13
 #fullscreen = true
 #icon_name = terminal
 #mouse_autohide = false
@@ -38,7 +38,7 @@ cursor_shape = underline
 #size_hints = false
 
 # "off", "left" or "right"
-scrollbar = off
+scrollbar = right
 
 [colors]
 
@@ -46,7 +46,7 @@ scrollbar = off
 foreground      = #f8f8f2
 foreground_bold = #f8f8f2
 cursor          = #f8f8f2
-background      = rgba(40, 42, 64, 0.9)
+background      = rgba(40, 42, 64, 0.60)
 
 # black
 color0  = #000000

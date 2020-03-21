@@ -1,11 +1,46 @@
+[bar/mnml]
+padding-left             = 0
+padding-right            = 0
+module-margin-left       = 1
+module-margin-right      = 1
+background = #002a2c37
+foreground = #fff
+width                    = 100%
+height                   = 30
+radius                   = 0%
+line-size                = 0
+bottom                   = false
+border-bottom-size       = 0
+fixed-center = true
+font-0 = San Francisco Display Regular:size=14;3
+font-1 = unifont:fontformat=truetype:size=14;3
+font-2 = "Font Awesome 5 Brands:size=13;3"
+font-3 = "Font Awesome 5 Free:style=Solid:size=13;3"
+font-4 = "icomoon-extended-ultra:size=14;3"
+font-5 = "Ubuntu Nerd Font:size=14;3"
+font-6 = "MaterialIcons:size=14;3"
+modules-left = i3 bspwm
+modules-center =
+modules-right = date time volume poweroff tray
+module-margin = 2
+enable-ipc = true
+tray-maxsize = 18
+tray-detached = false
+tray-transparent = true
 
+
+override-redirect = false
+offset-x = 0%
+offset-y = 0
+
+padding = 0
 
 [bar/default]
 width = 100%
 height = 30
 radius = 0
 fixed-center = true
-bottom = false
+bottom = true
 background = #0325252c
 foreground = #ffffff
 
@@ -21,12 +56,12 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = "Operator Mono Ssm Lig Medium:size=14;1"
-font-1 = "Font Awesome 5 Free:style=Solid:size=14;1"
-font-2 = "Font Awesome 5 Brands:size=14;1"
-#font-0 = "Noto Mono for Powerline Regular: size=15;1"
-modules-left = i3
-modules-right = pulseaudio date powermenu
+font-0 = "Noto Sans:style=Bold:size=13;3"
+font-1 = "Font Awesome 5 Free:style=Solid:size=14;3"
+font-2 = "Font Awesome 5 Brands:size=14;3"
+font-3 = "Noto Sans Medium: size=13;3"
+modules-left = i3 bspwm
+modules-right = pulseaudio datetime poweroff
 
 #tray-position = right
 #tray-padding =
@@ -94,21 +129,93 @@ ramp-signal-3 = 
 ramp-signal-4 = 
 ramp-signal-foreground = #25252c
 
-[module/eth]
-type = internal/network
-interface = enp0s3
-interval = 3.0
+[module/bspwm]
+type = internal/bspwm
 
-format-connected-padding = 2
-format-connected-foreground = #25252c
-format-connected-background = #1187ee
-format-connected-prefix = " "
-format-connected-prefix-foreground = #25252c
-label-connected = %local_ip%
+ws-icon-0 = 0;0
+ws-icon-1 = I;%{F#1187ee}
+ws-icon-2 = II;%{F#1187ee}
+ws-icon-3 = III;%{F#1187ee}
+ws-icon-4 = IV;%{F#7B6FDE}
+ws-icon-5 = V;%{F#738ADB}
+ws-icon-6 = VI;%{F#E55B0A}
+ws-icon-7 = VII;%{F#1ED761}
+ws-icon-default = 
+pin-workspaces = true
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
 
-format-disconnected =
+label-mode-padding = 2
+label-mode-foreground = #ffffff
+label-mode-background = argb:bb25252c
+
+label-focused = %icon%
+label-focused-background = #dd25252c
+label-focused-foreground = #1187ee
+label-focused-padding = 2
+
+label-occupied = %icon%
+label-occupied-background = argb:bb25252c
+label-occupied-foreground = #aaa
+label-occupied-padding = 2
+
+label-empty = 
+label-empty-background = #25252c
+label-empty-foreground = #fff
+label-empty-padding = 2
+
+label-urgent = %icon%
+label-urgent-background = #BA2922
+label-urgent-padding = 2
 
 [module/date]
+type = internal/date
+interval = 60
+date = %a %d %b
+time = %l:%M %p
+label =    %date%      %time%
+;label =  %time%
+format-padding = 1
+
+[module/volume]
+type = internal/volume
+format-volume =   <ramp-volume>  <label-volume>
+format-muted =     0%
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+[module/poweroff]
+type = custom/script
+exec = echo "  "
+click-left = rofi -modi run,drun,window -show drun
+
+click-right = /usr/bin/rofi-logout
+click-middle = i3lock-fancy -pg &
+format-padding = 1
+
+[module/rofi]
+type = custom/script
+exec = echo "  "
+click-left = rofi -show drun
+format-padding = 1
+
+
+[module/eth]
+type = internal/network
+interface = enp2s0
+interval = 3.0
+format-connected = <label-connected>
+format-connected-prefix = "  "
+format-connected-prefix-foreground = #b6a49b
+label-connected = %downspeed:9%
+format-disconnected = <label-disconnected>
+label-disconnected = not connected
+label-disconnected-foreground = #66ffffff
+format-padding = 1
+
+[module/datetime]
 type = internal/date
 interval = 5
 
@@ -121,7 +228,8 @@ format-background = #1187ee
 format-padding = 2
 
 label = %date% %time%
-label-font = 3
+label-font = 1
+
 [module/pulseaudio]
 type = internal/pulseaudio
 
@@ -206,10 +314,10 @@ margin-top = w
 margin-bottom = 0
 
 [bar/dp]
-inherit = bar/default
-[bar/hdmi]
-inherit = bar/default
-monitor=HDMI-0
-modules-right = pulseaudio date
+inherit = bar/mnml
+monitor = DP-2
+[bar/dp1]
+inherit = bar/mnml
+monitor=DP-1
 tray-position = right
 

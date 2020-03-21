@@ -14,4 +14,4 @@ sleep 1;
 #   polybar --reload i3wmthemer_bar &
 # fi
 polybar --reload dp &
-polybar --reload hdmi &
+polybar --reload dp1 &

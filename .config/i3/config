@@ -1,5 +1,5 @@
-set $mod Mod1
-set $win Mod4
+set $mod Mod4
+set $win Mod1
 new_window pixel 1
 new_float normal
 
@@ -86,6 +86,9 @@ bindsym $mod+minus scratchpad show
 # navigate workspaces next / previous
 bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
+
+# launch custom apps
+bindsym $win+Shift+c exec google-chrome-stable --enable-features=WebUIDarkMode --force-dark-mode 
 
 # workspaces
 set $ws1 1
@@ -180,7 +183,7 @@ mode "$mode_system" {
     bindsym e exec --no-startup-id i3exit logout, mode "default"
     bindsym h exec --no-startup-id i3exit hibernate, mode "default"
     bindsym r exec --no-startup-id i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+    bindsym Shift+s exec t--no-startup-id i3exit shutdown, mode "default"
 
     # exit system mode: "Enter" or "Escape"
     bindsym Return mode "default"
@@ -212,9 +215,12 @@ mode "resize" {
 }
 
 # Autostart applications
-exec --no-startup-id nitrogen --restore; sleep 1;greenclip daemon;/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 
-exec compton --config /$HOME/.config/i3/compton.conf
+exec --no-startup-id nitrogen --restore; sleep 1;greenclip daemon;/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1;
 exec --no-startup-id /home/v16/.config/polybar/init.sh;
+exec --no-startup-id bash /home/v16/message-ip.sh
+exec --no-startup-id sleep 5;hideIt.sh -N '^polybar-dp1_DP-1$' -p 5 -d top --region 0x0+1920+-5
+exec --no-startup-id sleep 5;hideIt.sh -N '^polybar-dp_DP-2$' -p 5 -d top --region 1920x0+1920+-5
+exec --no-startup-id compton --config /$HOME/.config/i3/compton.conf
 # Theme colors
 #  	        border	bground	text 	indicator 	child_border
 client.focused #1187ee #25252c #ffffff #1187ee
@@ -268,16 +274,17 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
-assign [class="Brave"] $ws2
+assign [class="Google-chrome"] $ws2
+assign [class="Firefox"] $ws2
 assign [class="discord"] $ws4
 assign [class="Telegram"] $ws4
 assign [class="Code"] $ws3
 
-bindsym $win+Shift+s --release exec "scrot -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
+bindsym $win+Shift+s exec --no-startup-id "maim -s --format=png | xclip -selection clipboard -t image/png "
 bindsym $win+s exec "scrot /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
 for_window [class="Spotify"] move to workspace $ws6
 bindsym $mod+greater move workspace to output right
 bindsym $mod+less move workspace to output left
 bindsym $mod+Shift+greater move container to output right
 bindsym $mod+Shift+less move container to output left
-bindsym $mod+Shift+9 exec flameshot gui
+bindsym $win+f exec thunar
